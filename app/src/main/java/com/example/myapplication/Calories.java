@@ -3,62 +3,64 @@ package com.example.myapplication;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Calories#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Calories extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Calories() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Calories.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Calories newInstance(String param1, String param2) {
-        Calories fragment = new Calories();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_calories, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_calories, container, false);
+        MaterialButton changeCalorieLimit = view.findViewById(R.id.changeCalorieLimit);
+        MaterialButton addCalorie = view.findViewById(R.id.addCalorie);
+        ProgressBar calorieProgressBar = view.findViewById(R.id.calorieProgressBar);
+        TextView calorieProgressText = view.findViewById(R.id.calorieProgressText);
+
+         RecyclerView calorieListView;
+        CalorieAdapter adapter;
+        List<CalorieItem> calorieItems;
+
+        calorieProgressBar.setMax(2000);
+        calorieProgressBar.setProgress(400);
+
+        calorieProgressText.setText(calorieProgressBar.getProgress()+"/"+calorieProgressBar.getMax());
+
+        addCalorie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(getContext(), "Edit in Progress", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        calorieListView = view.findViewById(R.id.CalorieList);
+        calorieListView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        calorieItems = new ArrayList<>();
+        calorieItems.add(new CalorieItem("Breakfast - Eggs & Toast", 350));
+        calorieItems.add(new CalorieItem("Lunch - Chicken Salad", 450));
+        calorieItems.add(new CalorieItem("Snack - Protein Bar", 200));
+
+        adapter = new CalorieAdapter(calorieItems);
+        calorieListView.setAdapter(adapter);
+
+
+        return view;
     }
 }

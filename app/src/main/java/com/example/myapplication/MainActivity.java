@@ -1,5 +1,8 @@
 package com.example.myapplication;
 
+import android.graphics.Color;
+import android.graphics.Shader;
+import android.graphics.SweepGradient;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -10,10 +13,13 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager2 viewPager2;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
