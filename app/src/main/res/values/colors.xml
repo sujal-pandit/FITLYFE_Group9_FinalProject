@@ -2,4 +2,38 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#FF9E9E9E</color>
+    <color name="white_60">#99FFFFFF</color>
+    <color name="white_80">#CCFFFFFF</color>
+    <color name="white_20">#33FFFFFF</color>
+    <color name="transparent_white_10">#1AFFFFFF</color>
+    <color name="primary_dark">#FF6200EE</color>
+    <color name="gray_light">#FFE0E0E0</color>
+    <color name="blue_500">#FF2196F3</color>
+    <color name="blue_300">#FF8AB4F8</color>
+    <color name="gray_medium">#FF9E9E9E</color>
+    <color name="gray_dark">#FF616161</color>
+    <color name="light_blue_bg">#B3E5FC</color> <!-- Optional background -->
+
+
+
+    <color name="chip_background">#FFE0E0E0</color>
+    <color name="chip_text">#FF6200EE</color>
+    <color name="card_stroke">#1F000000</color>
+
+    <color name="code_bg">#263238</color>
+    <color name="code_text">#ECEFF1</color>
+
+    <!-- Difficulty Colors -->
+    <color name="difficulty_default">#FF616161</color>
+    <color name="difficulty_beginner">#4CAF50</color>
+    <color name="difficulty_intermediate">#2196F3</color>
+    <color name="difficulty_advanced">#FF9800</color>
+    <color name="difficulty_expert">#F44336</color>
+    <color name="lightred">#FFD7D7</color>
+    <color name="lightgreen">#A3EFA5</color>
+    <color name="lightblue">#88C2F2</color>
+    <color name="blue">#0089FF</color>
+    <color name="yellow">#E4D449</color>
+    <color name="light">#B8D6E0</color>
 </resources>
