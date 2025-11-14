@@ -7,9 +7,12 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.widget.ViewPager2;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 public class Home extends Fragment {
 
     ArrayList barArrayList;
+    LinearLayout calorieBox;
     CircularProgressBar stepProgressBar,calorieProgressBar;
 
     @Override
@@ -33,8 +37,9 @@ public class Home extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // === Bar Chart Setup ===
+
         BarChart barChart = view.findViewById(R.id.monthlyBarChart);
+        LinearLayout calorieBox = view.findViewById(R.id.calorieBox);
         barArrayList = new ArrayList<>();
         getData();
 
@@ -71,6 +76,13 @@ public class Home extends Fragment {
         calorieProgressBar.setProgressBarColorDirection(CircularProgressBar.GradientDirection.LEFT_TO_RIGHT);
 
         calorieProgressBar.setProgress(100f);
+
+       calorieBox.setOnClickListener(new View.OnClickListener(){
+           public void onClick(View v){
+               ViewPager2 viewPager = requireActivity().findViewById(R.id.viewpager2);
+               viewPager.setCurrentItem(2, true);
+       }});
+
 
         return view;
     }

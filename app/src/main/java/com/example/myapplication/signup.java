@@ -38,6 +38,7 @@ public class signup extends AppCompatActivity {
             return insets;
         });
         auth = FirebaseAuth.getInstance();
+        tvLogin = findViewById(R.id.tvLogin);
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         etConfirmPassword = findViewById(R.id.etConfirmPassword);
@@ -67,6 +68,10 @@ public class signup extends AppCompatActivity {
                 });
                 }
             }
+        });
+        tvLogin.setOnClickListener(v -> {
+            startActivity(new Intent(signup.this, login.class));
+            finish();
         });
     }
 }
