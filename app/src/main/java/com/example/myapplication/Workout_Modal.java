@@ -2,21 +2,23 @@ package com.example.myapplication;
 
 public class Workout_Modal {
 
-    int img;
+    String img;
 
     String name,calories;
 
-    public Workout_Modal(int img, String name,String calories){
+    public Workout_Modal(){}
+
+    public Workout_Modal(String img, String name, String calories){
         this.img=img;
         this.name=name;
         this.calories=calories;
     }
 
-    public int getImg() {
+    public String getImg() {
         return img;
     }
 
-    public void setImg(int img) {
+    public void setImg(String img) {
         this.img = img;
     }
 
@@ -32,9 +34,8 @@ public class Workout_Modal {
         return calories;
     }
 
-    public void setCalories(String number) {
+    public void setCalories(String calories) {
         this.calories = calories;
     }
-
 
 }

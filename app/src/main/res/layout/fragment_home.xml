@@ -28,7 +28,6 @@
          android:layout_height="wrap_content"
          android:id="@+id/dailyWorkoutLog"
          android:layout_marginBottom="10dp"
-
          android:text="Did You Train Today?"/>
 
         <LinearLayout
@@ -85,13 +84,38 @@
                     android:textStyle="bold"
                     android:textSize="18dp"/>
 
-                <TextView
-                    android:layout_height="wrap_content"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:text="10000/10000"
-                    android:textStyle="bold"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:padding="10dp"
-                    android:layout_gravity ="center"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/currentCalorie"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="/"
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/maxCalorie"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
+
+
+                </LinearLayout>
 
                 <com.mikhaellopez.circularprogressbar.CircularProgressBar
                     android:id="@+id/calorieProgressBar"
