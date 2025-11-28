@@ -8,7 +8,6 @@
     android:background="@color/white"
     tools:context=".signup">
 
-    <!-- Make the whole card scrollable -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll"
         android:layout_width="0dp"
@@ -23,20 +22,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white">
 
-            <!-- CardView Container -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
                 app:cardCornerRadius="18dp"
-                app:cardElevation="9dp">
+                app:cardElevation="9dp"
+                app:cardBackgroundColor="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:background="@color/white"
                     android:padding="24dp">
 
                     <!-- Logo + App Name -->
@@ -87,8 +88,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="@color/gray_light"
+                        app:hintTextColor="@color/gray_dark"
                         app:startIconDrawable="@drawable/person"
-                        app:boxStrokeColor="@color/gray_light">
+                        app:startIconTint="@color/gray_dark">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etName"
@@ -96,7 +100,54 @@
                             android:layout_height="wrap_content"
                             android:hint="Full Name"
                             android:textColor="@color/black"
+                            android:textColorHint="@color/gray_dark"
                             android:inputType="textPersonName" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Date of Birth -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="@color/gray_light"
+                        app:hintTextColor="@color/gray_dark"
+                        app:startIconDrawable="@drawable/ic_calendar_24"
+                        app:startIconTint="@color/gray_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etDob"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Date of Birth"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray_dark"
+                            android:focusable="false"
+                            android:clickable="true"
+                            android:inputType="date" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Phone -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dp"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="@color/gray_light"
+                        app:hintTextColor="@color/gray_dark"
+                        app:startIconDrawable="@drawable/ic_phone"
+                        app:startIconTint="@color/gray_dark">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Phone Number"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/gray_dark"
+                            android:inputType="phone" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <!-- Email -->
@@ -105,8 +156,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="@color/gray_light"
+                        app:hintTextColor="@color/gray_dark"
                         app:startIconDrawable="@drawable/ic_email"
-                        app:boxStrokeColor="@color/gray_light">
+                        app:startIconTint="@color/gray_dark">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etEmail"
@@ -114,6 +168,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Email Address"
                             android:textColor="@color/black"
+                            android:textColorHint="@color/gray_dark"
                             android:inputType="textEmailAddress" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,8 +178,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="@color/gray_light"
+                        app:hintTextColor="@color/gray_dark"
                         app:endIconMode="password_toggle"
-                        app:boxStrokeColor="@color/gray_light">
+                        app:startIconTint="@color/gray_dark"
+                        app:endIconTint="@color/gray_dark">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etPassword"
@@ -132,6 +191,7 @@
                             android:layout_height="wrap_content"
                             android:hint="Password"
                             android:textColor="@color/black"
+                            android:textColorHint="@color/gray_dark"
                             android:inputType="textPassword" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,8 +201,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="@color/gray_light"
+                        app:hintTextColor="@color/gray_dark"
                         app:endIconMode="password_toggle"
-                        app:boxStrokeColor="@color/gray_light">
+                        app:startIconTint="@color/gray_dark"
+                        app:endIconTint="@color/gray_dark">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etConfirmPassword"
@@ -150,20 +214,19 @@
                             android:layout_height="wrap_content"
                             android:hint="Confirm Password"
                             android:textColor="@color/black"
+                            android:textColorHint="@color/gray_dark"
                             android:inputType="textPassword" />
                     </com.google.android.material.textfield.TextInputLayout>
-
-                    <!-- Terms -->
 
                     <!-- Sign Up Button -->
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnSignUp"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:backgroundTint="@color/blue_500"
                         android:text="Sign Up"
                         android:textColor="@color/white"
                         android:textSize="16sp"
+                        android:backgroundTint="@color/blue_500"
                         app:cornerRadius="10dp"
                         app:rippleColor="@color/blue_300"
                         android:layout_marginBottom="16dp" />
@@ -187,7 +250,7 @@
                             android:layout_height="wrap_content"
                             android:paddingHorizontal="12dp"
                             android:text="OR"
-                            android:textColor="@color/gray_medium"
+                            android:textColor="@color/gray_dark"
                             android:textSize="14sp" />
 
                         <View
@@ -204,10 +267,10 @@
                         android:layout_height="48dp"
                         android:text="Continue with Google"
                         android:textColor="@color/gray_dark"
+                        android:backgroundTint="@color/white"
                         app:icon="@drawable/ic_google"
                         app:iconPadding="12dp"
                         app:iconTint="@null"
-                        android:backgroundTint="@color/white"
                         app:strokeColor="@color/gray_light"
                         app:strokeWidth="1dp"
                         android:layout_marginBottom="12dp" />
