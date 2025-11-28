@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1069573976188",
+    "firebase_url": "https://fitlyfe-7e71e-default-rtdb.firebaseio.com",
+    "project_id": "fitlyfe-7e71e",
+    "storage_bucket": "fitlyfe-7e71e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069573976188:android:876c3ad4774ed8e167d9f9",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBRXeoCAeg3FpHkxdlRUyaz7QeKPSqaTg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
