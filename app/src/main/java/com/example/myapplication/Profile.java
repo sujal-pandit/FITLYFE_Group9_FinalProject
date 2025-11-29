@@ -1,88 +1,136 @@
 package com.example.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Profile extends Fragment {
 
+    private TextView tvHeaderName, tvName, tvBirthday, tvPhone, tvEmail, tvPassword;
+    private ImageView imgAvatar;
+    private ImageButton btnBack;
+    private Button btnEditProfile;
+
     private FirebaseAuth auth;
-    private TextView tvProfileName, tvProfileEmail;
-    private ImageView profileImage;
-    private Button btnLogout, btnEditProfile;
+    private FirebaseFirestore db;
+    private String uid;
 
     public Profile() {
-        // Required empty constructor
+        // Required empty public constructor
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        auth = FirebaseAuth.getInstance();
-        FirebaseUser user = auth.getCurrentUser();
-
-        tvProfileName = view.findViewById(R.id.tvProfileName);
-        tvProfileEmail = view.findViewById(R.id.tvProfileEmail);
-        profileImage = view.findViewById(R.id.profileImage);
-        btnLogout = view.findViewById(R.id.btnLogout);
+        // ---------- UI refs ----------
+        tvHeaderName = view.findViewById(R.id.tvHeaderName);
+        tvName       = view.findViewById(R.id.tvName);
+        tvBirthday   = view.findViewById(R.id.tvBirthday);
+        tvPhone      = view.findViewById(R.id.tvPhone);
+        tvEmail      = view.findViewById(R.id.tvEmail);
+        tvPassword   = view.findViewById(R.id.tvPassword);
+        imgAvatar    = view.findViewById(R.id.imgAvatar);
+        btnBack      = view.findViewById(R.id.btnBack);
         btnEditProfile = view.findViewById(R.id.btnEditProfile);
 
-        // -------------------------------
-        // Load User Information
-        // -------------------------------
-        if (user != null) {
+        auth = FirebaseAuth.getInstance();
+        db   = FirebaseFirestore.getInstance();
 
-            // Email
-            if (user.getEmail() != null) {
-                tvProfileEmail.setText(user.getEmail());
-            }
-
-            // Display name from Firebase user (if set)
-            if (user.getDisplayName() != null && !user.getDisplayName().isEmpty()) {
-                tvProfileName.setText(user.getDisplayName());
-            } else {
-                tvProfileName.setText("User");
-            }
-
-        } else {
-            tvProfileName.setText("Not Logged In");
-            tvProfileEmail.setText("");
+        FirebaseUser user = auth.getCurrentUser();
+        if (user == null) {
+            Toast.makeText(getContext(), "Not logged in", Toast.LENGTH_SHORT).show();
+            return view;
         }
 
+        uid = user.getUid();
 
-        btnLogout.setOnClickListener(v -> {
-            auth.signOut();
-            Toast.makeText(getContext(), "Logged out", Toast.LENGTH_SHORT).show();
+        // Default email from auth (will be overwritten by Firestore if present)
+        if (user.getEmail() != null) {
+            tvEmail.setText(user.getEmail());
+        }
 
-            // Go back to login screen
-            Intent intent = new Intent(getActivity(), login.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+        // Show masked password label (we never show real password)
+        tvPassword.setText("********");
 
-            requireActivity().finish();
-        });
+        // Load profile from Firestore
+        loadProfile();
 
+        btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
 
-        btnEditProfile.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Edit Profile Coming Soon", Toast.LENGTH_SHORT).show();
-        });
+        btnEditProfile.setOnClickListener(v ->
+                Toast.makeText(getContext(), "Edit profile clicked", Toast.LENGTH_SHORT).show()
+        );
 
         return view;
+    }
+
+    private void loadProfile() {
+        db.collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(this::applyProfile)
+                .addOnFailureListener(e ->
+                        Toast.makeText(
+                                getContext(),
+                                "Failed to load profile: " +
+                                        (e.getMessage() != null ? e.getMessage() : ""),
+                                Toast.LENGTH_SHORT
+                        ).show()
+                );
+    }
+
+    private void applyProfile(DocumentSnapshot snapshot) {
+        if (!snapshot.exists()) {
+            Toast.makeText(getContext(), "No profile data found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Field names must match what signup saves
+        String name     = snapshot.getString("name");
+        String phone    = snapshot.getString("phone");
+        String birthday = snapshot.getString("birthday");
+        String email    = snapshot.getString("email");
+
+        // For debugging – you can temporarily uncomment this:
+        // Toast.makeText(getContext(),
+        //         "Loaded: " + name + " / " + phone + " / " + birthday,
+        //         Toast.LENGTH_LONG).show();
+
+        if (name != null && !name.isEmpty()) {
+            tvHeaderName.setText(name);
+            tvName.setText(name);
+        }
+
+        if (phone != null && !phone.isEmpty()) {
+            tvPhone.setText(phone);
+        }
+
+        if (birthday != null && !birthday.isEmpty()) {
+            tvBirthday.setText(birthday);
+        }
+
+        if (email != null && !email.isEmpty()) {
+            tvEmail.setText(email);
+        }
     }
 }

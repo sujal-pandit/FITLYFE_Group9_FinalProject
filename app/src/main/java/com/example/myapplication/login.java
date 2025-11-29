@@ -45,8 +45,6 @@ public class login extends AppCompatActivity {
         signup = findViewById(R.id.tvSignUp);
         googlelogin = findViewById(R.id.btnGoogleSignUp);
 
-        etEmail.setText("sujal@gmail.com");
-        etPassword.setText("sujal123");
 
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
