@@ -5,10 +5,55 @@
     android:layout_height="match_parent"
     tools:context=".Workout">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello Workout Fragment" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:textSize="24dp"
+            android:paddingBottom="10dp"
+            android:text="WORKOUT" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/addWorkoutBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/add" />
+
+            <Spinner
+                android:id="@+id/daySpinner"
+                android:layout_width="0dp"
+                android:layout_height="30sp"
+                android:layout_weight="1"
+                android:spinnerMode="dropdown"/>
+
+            <ImageView
+                android:id="@+id/removeWorkoutBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/remove" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/recWorkoutView">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
 
 </FrameLayout>

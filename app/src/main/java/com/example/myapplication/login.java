@@ -45,11 +45,13 @@ public class login extends AppCompatActivity {
         signup = findViewById(R.id.tvSignUp);
         googlelogin = findViewById(R.id.btnGoogleSignUp);
 
+        etEmail.setText("sujal@gmail.com");
+        etPassword.setText("sujal123");
+
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
             String password = etPassword.getText() != null ? etPassword.getText().toString() : "";
 
-            // ---- Validate inputs
             if (email.isEmpty()) {
                 etEmail.setError("Email required");
                 etEmail.requestFocus();
@@ -66,7 +68,6 @@ public class login extends AppCompatActivity {
                 return;
             }
 
-            // ---- Login
             auth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener((OnSuccessListener<AuthResult>) authResult -> {
                         Toast.makeText(login.this, "Login Successful", Toast.LENGTH_SHORT).show();

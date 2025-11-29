@@ -5,10 +5,99 @@
     android:layout_height="match_parent"
     tools:context=".Calories">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello Calories Fragment" />
+        android:padding="10dp"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:paddingBottom="10dp"
+        android:text="CALORIES" />
+        
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:id="@+id/calorieProgressBar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:max="2000"
+            android:progress="600"
+            android:progressTint="#2EF527"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id = "@+id/calorieProgressText"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textStyle="bold"
+            android:text="600/2000"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"/>
+
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/changeCalorieLimit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#74CCC2"
+            android:textColor="@color/black"
+            android:text="Change your Daily Calorie Limit"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Today's Caloric Intake"
+            android:textStyle="bold"
+            android:textSize="18dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:gravity="center_horizontal"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addCalorie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#74CCC2"
+                android:textColor="@color/black"
+                android:textSize="22dp"
+                android:enabled="true"
+                android:text="+" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/CalorieList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#B6B6B6"
+            android:scrollbars="vertical"/>
+
+
+
+
+    </LinearLayout>
 
 </FrameLayout>

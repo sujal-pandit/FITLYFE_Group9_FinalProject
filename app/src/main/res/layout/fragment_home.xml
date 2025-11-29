@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/home_frame"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
     tools:context=".Home">
 
     <LinearLayout
@@ -26,7 +28,6 @@
          android:layout_height="wrap_content"
          android:id="@+id/dailyWorkoutLog"
          android:layout_marginBottom="10dp"
-
          android:text="Did You Train Today?"/>
 
         <LinearLayout
@@ -49,12 +50,28 @@
                    android:gravity="center_horizontal"
                    android:textStyle="bold"
                    android:textSize="18dp"/>
+
+               <TextView
+                   android:layout_height="wrap_content"
+                   android:layout_width="wrap_content"
+                   android:text="10000/10000"
+                   android:textStyle="bold"
+                   android:padding="10dp"
+                   android:layout_gravity ="center"/>
+
+               <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                   android:id="@+id/stepProgressBar"
+                   android:layout_width="200dp"
+                   android:layout_height="200dp"
+                   android:layout_gravity="center"/>
+
            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:padding="10dp"
+                android:id="@+id/calorieBox"
                 android:layout_marginLeft="25dp"
                 android:background="@drawable/rounded_bg"
                 android:orientation="vertical">
@@ -65,8 +82,47 @@
                     android:text="CALORIES"
                     android:gravity="center_horizontal"
                     android:textStyle="bold"
-
                     android:textSize="18dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/currentCalorie"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="/"
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:id="@+id/maxCalorie"
+                        android:text="0"
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
+
+
+                </LinearLayout>
+
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/calorieProgressBar"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"/>
+
 
             </LinearLayout>
 
