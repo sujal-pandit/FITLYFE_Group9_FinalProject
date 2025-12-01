@@ -63,8 +63,7 @@ public class login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         signup = findViewById(R.id.tvSignUp);
         googlelogin = findViewById(R.id.btnGoogleSignUp);
-        etEmail.setText("sujal@gmail.com");
-        etPassword.setText("sujal123");
+
 
         // Email / Password login
         btnLogin.setOnClickListener(v -> {
