@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class login extends AppCompatActivity {
 
@@ -44,7 +45,6 @@ public class login extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         signup = findViewById(R.id.tvSignUp);
         googlelogin = findViewById(R.id.btnGoogleSignUp);
-
 
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
@@ -81,5 +81,17 @@ public class login extends AppCompatActivity {
             startActivity(new Intent(login.this, signup.class));
             finish();
         });
+    }
+
+    // 🔥 This is what makes "stay signed in" work
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            // user already logged in -> go straight to main screen
+            startActivity(new Intent(login.this, MainActivity.class));
+            finish();
+        }
     }
 }

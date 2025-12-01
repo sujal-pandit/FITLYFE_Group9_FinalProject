@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,8 +24,8 @@ public class Profile extends Fragment {
 
     private TextView tvHeaderName, tvName, tvBirthday, tvPhone, tvEmail, tvPassword;
     private ImageView imgAvatar;
-    private ImageButton btnBack;
-    private Button btnEditProfile;
+
+    private Button btnLogout;
 
     private FirebaseAuth auth;
     private FirebaseFirestore db;
@@ -50,8 +51,7 @@ public class Profile extends Fragment {
         tvEmail      = view.findViewById(R.id.tvEmail);
         tvPassword   = view.findViewById(R.id.tvPassword);
         imgAvatar    = view.findViewById(R.id.imgAvatar);
-        btnBack      = view.findViewById(R.id.btnBack);
-        btnEditProfile = view.findViewById(R.id.btnEditProfile);
+        btnLogout = view.findViewById(R.id.btnlogout);
 
         auth = FirebaseAuth.getInstance();
         db   = FirebaseFirestore.getInstance();
@@ -75,11 +75,14 @@ public class Profile extends Fragment {
         // Load profile from Firestore
         loadProfile();
 
-        btnBack.setOnClickListener(v -> requireActivity().onBackPressed());
 
-        btnEditProfile.setOnClickListener(v ->
-                Toast.makeText(getContext(), "Edit profile clicked", Toast.LENGTH_SHORT).show()
-        );
+
+        btnLogout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getActivity(), login.class));
+            requireActivity().finish();
+        });
+
 
         return view;
     }

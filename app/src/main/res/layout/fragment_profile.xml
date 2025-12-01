@@ -17,17 +17,6 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Back arrow -->
-    <ImageButton
-        android:id="@+id/btnBack"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:background="@android:color/transparent"
-        android:src="@drawable/ic_arrow_back_24"
-        android:tint="@android:color/white"
-        app:layout_constraintTop_toTopOf="@id/headerBg"
-        app:layout_constraintStart_toStartOf="@id/headerBg"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
 
     <!-- Name in header -->
     <TextView
@@ -217,10 +206,10 @@
 
     <!-- Edit profile button -->
     <Button
-        android:id="@+id/btnEditProfile"
+        android:id="@+id/btnlogout"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:text="Edit profile"
+        android:text="Log Out"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textColor="@android:color/white"
