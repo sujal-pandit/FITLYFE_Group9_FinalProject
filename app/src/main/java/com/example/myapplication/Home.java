@@ -54,9 +54,10 @@ public class Home extends Fragment implements SensorEventListener {
 
     // Step goal & calories
     private int stepGoal = 10000;              // default goal
-    private static final float CALORIES_PER_STEP = 0.04f; // defualt  formula of average calory being burned per step
-    private int stepCalories = 0;
-    //food calories from Calories fragment
+    private static final float CALORIES_PER_STEP = 0.04f; // avg calories burned per step
+    private int stepCalories = 0;              // burned calories from steps (not added to intake)
+
+    // food calories from Calories fragment
     private int foodCalories = 0;
     private int maxCalories = 2000;            // daily limit from Calories fragment
 
@@ -66,18 +67,16 @@ public class Home extends Fragment implements SensorEventListener {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        //listen to calorie updates from Calories fragment
+        // listen to calorie updates from Calories fragment
         getParentFragmentManager().setFragmentResultListener("calorieUpdate", this,
                 (requestKey, bundle) -> {
                     foodCalories = bundle.getInt("consumed", 0);
                     maxCalories = bundle.getInt("max", 2000);
 
-
                     calorieProgressBar.setProgressMax(maxCalories);
                     updateCalorieMeter();
                 }
         );
-
 
         BarChart barChart = view.findViewById(R.id.monthlyBarChart);
         calorieBox = view.findViewById(R.id.calorieBox);
@@ -87,7 +86,7 @@ public class Home extends Fragment implements SensorEventListener {
         maxCalorie = view.findViewById(R.id.maxCalorie);
         tvStepCountLabel = view.findViewById(R.id.tvStepCountLabel);
 
-
+        // ----- chart setup (your original) -----
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getAxisRight().setDrawGridLines(false);
         barChart.getXAxis().setDrawGridLines(false);
@@ -123,7 +122,7 @@ public class Home extends Fragment implements SensorEventListener {
 
         barArrayList = new ArrayList<>();
 
-
+        // ----- step progress -----
         stepProgressBar = view.findViewById(R.id.stepProgressBar);
         stepProgressBar.setProgressBarColorStart(Color.RED);
         stepProgressBar.setProgressBarColorEnd(Color.GREEN);
@@ -135,7 +134,7 @@ public class Home extends Fragment implements SensorEventListener {
             tvStepCountLabel.setText("0/" + stepGoal);
         }
 
-        //calorie progress
+        // ----- calorie progress (INTAKE ONLY) -----
         calorieProgressBar = view.findViewById(R.id.calorieProgressBar);
         calorieProgressBar.setProgressBarColorStart(Color.RED);
         calorieProgressBar.setProgressBarColorEnd(Color.GREEN);
@@ -143,7 +142,7 @@ public class Home extends Fragment implements SensorEventListener {
         calorieProgressBar.setProgressMax(maxCalories);
         updateCalorieMeter();
 
-        // lisner for calory card to redirect it to calory tab
+        // listener for calorie card to redirect it to Calories tab
         calorieBox.setOnClickListener(v1 -> {
             ViewPager2 viewPager = requireActivity().findViewById(R.id.viewpager2);
             viewPager.setCurrentItem(2, true);
@@ -169,7 +168,7 @@ public class Home extends Fragment implements SensorEventListener {
         return view;
     }
 
-    //loading step goal from fire base
+    // load step goal from Firebase
     private void loadStepGoal() {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase.getInstance().getReference("users")
@@ -235,7 +234,6 @@ public class Home extends Fragment implements SensorEventListener {
         super.onPause();
     }
 
-
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() != Sensor.TYPE_STEP_COUNTER) return;
@@ -261,33 +259,32 @@ public class Home extends Fragment implements SensorEventListener {
             tvStepCountLabel.setText(stepsToday + "/" + stepGoal);
         }
 
-        // calories from steps
+        // calories from steps (kept for future use, but NOT added to intake meter)
         stepCalories = (int) (stepsToday * CALORIES_PER_STEP);
 
-        // update full calorie meter
-        updateCalorieMeter();
+        // DO NOT modify food calorie meter here
+        // updateCalorieMeter();  // not needed, foodCalories comes from Calories fragment
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) { }
 
-    //combine food + step calories, update meter
+    // update intake calorie meter (FOOD ONLY)
     private void updateCalorieMeter() {
         if (calorieProgressBar == null || currentCalorie == null || maxCalorie == null) return;
 
-        int total = foodCalories + stepCalories;
+        int totalFood = foodCalories;
 
         if (maxCalories <= 0) {
             maxCalories = 2000;
         }
 
         calorieProgressBar.setProgressMax(maxCalories);
-        calorieProgressBar.setProgress(Math.min(total, maxCalories));
+        calorieProgressBar.setProgress(Math.min(totalFood, maxCalories));
 
-        currentCalorie.setText(String.valueOf(total));
+        currentCalorie.setText(String.valueOf(totalFood));
         maxCalorie.setText(String.valueOf(maxCalories));
     }
-
 
     private void updateChartFromFirebase() {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
