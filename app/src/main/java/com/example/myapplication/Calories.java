@@ -42,6 +42,12 @@ public class Calories extends Fragment {
         View view = inflater.inflate(R.layout.fragment_calories, container, false);
 
 
+        getParentFragmentManager().setFragmentResultListener("requestCalorieData", this,
+                (key, bundle) -> {
+                    loadCaloriesFromFirebase(); // will send calorieUpdate
+                }
+        );
+
         MaterialButton changeCalorieLimit = view.findViewById(R.id.changeCalorieLimit);
         MaterialButton addCalorie = view.findViewById(R.id.addCalorie);
         calorieProgressBar = view.findViewById(R.id.calorieProgressBar);
@@ -96,6 +102,8 @@ public class Calories extends Fragment {
 
             calorieProgressBar.setProgress(totalCalories);
             calorieProgressText.setText(totalCalories + "/" + calorieProgressBar.getMax());
+
+            sendCalorieUpdateToHome();
     });}
 
     private void showAddCalorieDialog() {
@@ -148,8 +156,6 @@ public class Calories extends Fragment {
                 .addOnFailureListener(e ->
                         Toast.makeText(getContext(), "Failed to add meal", Toast.LENGTH_SHORT).show()
                 );
-
-        sendCalorieUpdateToHome();
     }
 
     private void showChangeCalorieLimitDialog() {

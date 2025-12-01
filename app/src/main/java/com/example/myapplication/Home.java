@@ -61,9 +61,11 @@ public class Home extends Fragment {
                 }
         );
 
+        getParentFragmentManager().setFragmentResult("requestCalorieData", new Bundle());
+
 
         BarChart barChart = view.findViewById(R.id.monthlyBarChart);
-        LinearLayout calorieBox = view.findViewById(R.id.calorieBox);
+        calorieBox = view.findViewById(R.id.calorieBox);
         CheckBox dailyWorkout = view.findViewById(R.id.dailyWorkoutLog);
         currentCalorie = view.findViewById(R.id.currentCalorie);
         maxCalorie=view.findViewById(R.id.maxCalorie);
@@ -124,6 +126,7 @@ public class Home extends Fragment {
             }
         });
 
+        updateChartFromFirebase();
 
         return view;
     }
@@ -131,6 +134,7 @@ public class Home extends Fragment {
     private void updateChartFromFirebase(){
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("workoutLogs").child(userId);
+
 
        ref.get().addOnCompleteListener(task->{
            barArrayList.clear();
