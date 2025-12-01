@@ -46,7 +46,7 @@ public class Home extends Fragment implements SensorEventListener {
     TextView currentCalorie, maxCalorie;
     TextView tvStepCountLabel;
 
-    //Step counter stuff
+
     private SensorManager sensorManager;
     private Sensor stepSensor;
     private boolean hasStepSensor = false;
