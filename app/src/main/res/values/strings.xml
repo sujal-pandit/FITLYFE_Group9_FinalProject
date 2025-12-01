@@ -2,4 +2,6 @@
     <string name="app_name">FITLYFE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="default_web_client_id">1069573976188-9a6kfe5vhm02peprnl485el8t2prd3vv.apps.googleusercontent.com</string>
+
 </resources>

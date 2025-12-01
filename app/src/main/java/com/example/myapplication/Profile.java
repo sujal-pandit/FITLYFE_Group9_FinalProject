@@ -32,7 +32,7 @@ public class Profile extends Fragment {
     private String uid;
 
     public Profile() {
-        // Required empty public constructor
+
     }
 
     @Nullable
@@ -43,7 +43,7 @@ public class Profile extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // ---------- UI refs ----------
+        // UI refs
         tvHeaderName = view.findViewById(R.id.tvHeaderName);
         tvName       = view.findViewById(R.id.tvName);
         tvBirthday   = view.findViewById(R.id.tvBirthday);
@@ -64,12 +64,12 @@ public class Profile extends Fragment {
 
         uid = user.getUid();
 
-        // Default email from auth (will be overwritten by Firestore if present)
+        // Default email from auth
         if (user.getEmail() != null) {
             tvEmail.setText(user.getEmail());
         }
 
-        // Show masked password label (we never show real password)
+
         tvPassword.setText("********");
 
         // Load profile from Firestore
@@ -108,16 +108,12 @@ public class Profile extends Fragment {
             return;
         }
 
-        // Field names must match what signup saves
+
         String name     = snapshot.getString("name");
         String phone    = snapshot.getString("phone");
         String birthday = snapshot.getString("birthday");
         String email    = snapshot.getString("email");
 
-        // For debugging – you can temporarily uncomment this:
-        // Toast.makeText(getContext(),
-        //         "Loaded: " + name + " / " + phone + " / " + birthday,
-        //         Toast.LENGTH_LONG).show();
 
         if (name != null && !name.isEmpty()) {
             tvHeaderName.setText(name);

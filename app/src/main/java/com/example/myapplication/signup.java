@@ -33,7 +33,7 @@ public class signup extends AppCompatActivity {
     private FirebaseFirestore db;
 
     private TextInputEditText etEmail, etPassword, etConfirmPassword, etName, etPhone, etDob;
-    private Button btnSignUp, btnGoogleSignUp;
+    private Button btnSignUp;
     private TextView tvLogin;
 
     @Override
@@ -58,7 +58,6 @@ public class signup extends AppCompatActivity {
         etPhone = findViewById(R.id.etPhone);
         etDob = findViewById(R.id.etDob);
         btnSignUp = findViewById(R.id.btnSignUp);
-        btnGoogleSignUp = findViewById(R.id.btnGoogleSignUp);
         tvLogin = findViewById(R.id.tvLogin);
 
         // DOB picker

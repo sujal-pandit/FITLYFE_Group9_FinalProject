@@ -43,7 +43,7 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation(libs.firebase.database)
     implementation("com.google.firebase:firebase-firestore:25.0.0")
-
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation("com.mikhaellopez:circularprogressbar:3.1.0")
     implementation("com.google.firebase:firebase-database:20.3.0")
