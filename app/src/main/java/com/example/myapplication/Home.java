@@ -46,7 +46,7 @@ public class Home extends Fragment implements SensorEventListener {
     TextView currentCalorie, maxCalorie;
     TextView tvStepCountLabel;
 
-    // ---- Step counter stuff ----
+    //Step counter stuff
     private SensorManager sensorManager;
     private Sensor stepSensor;
     private boolean hasStepSensor = false;
@@ -86,7 +86,7 @@ public class Home extends Fragment implements SensorEventListener {
         maxCalorie = view.findViewById(R.id.maxCalorie);
         tvStepCountLabel = view.findViewById(R.id.tvStepCountLabel);
 
-        // ----- chart setup (your original) -----
+        //chart setup
         barChart.getAxisLeft().setDrawGridLines(false);
         barChart.getAxisRight().setDrawGridLines(false);
         barChart.getXAxis().setDrawGridLines(false);
@@ -122,7 +122,7 @@ public class Home extends Fragment implements SensorEventListener {
 
         barArrayList = new ArrayList<>();
 
-        // ----- step progress -----
+        // step progress
         stepProgressBar = view.findViewById(R.id.stepProgressBar);
         stepProgressBar.setProgressBarColorStart(Color.RED);
         stepProgressBar.setProgressBarColorEnd(Color.GREEN);
@@ -134,7 +134,7 @@ public class Home extends Fragment implements SensorEventListener {
             tvStepCountLabel.setText("0/" + stepGoal);
         }
 
-        // ----- calorie progress (INTAKE ONLY) -----
+        // calorie progress
         calorieProgressBar = view.findViewById(R.id.calorieProgressBar);
         calorieProgressBar.setProgressBarColorStart(Color.RED);
         calorieProgressBar.setProgressBarColorEnd(Color.GREEN);

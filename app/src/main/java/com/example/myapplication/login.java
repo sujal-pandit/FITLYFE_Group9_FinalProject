@@ -64,7 +64,7 @@ public class login extends AppCompatActivity {
         signup = findViewById(R.id.tvSignUp);
         googlelogin = findViewById(R.id.btnGoogleSignUp);
 
-        // ===== Email / Password login (your existing logic) =====
+        // Email / Password login
         btnLogin.setOnClickListener(v -> {
             String email = etEmail.getText() != null ? etEmail.getText().toString().trim() : "";
             String password = etPassword.getText() != null ? etPassword.getText().toString() : "";
@@ -96,21 +96,20 @@ public class login extends AppCompatActivity {
                     );
         });
 
-        // ===== Go to Signup =====
+        //Sign up
         signup.setOnClickListener(v -> {
             startActivity(new Intent(login.this, signup.class));
             finish();
         });
 
-        // ===== Google Sign-In setup =====
+        //Google Sign-In calling
         setupGoogleSignIn();
 
         googlelogin.setOnClickListener(v -> signInWithGoogle());
     }
 
-    // ---------------------------------------
     // GOOGLE SIGN-IN SETUP
-    // ---------------------------------------
+
     private void setupGoogleSignIn() {
         GoogleSignInOptions gso =
                 new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -146,9 +145,8 @@ public class login extends AppCompatActivity {
         }
     }
 
-    // ---------------------------------------
-    // LINK GOOGLE ACCOUNT TO FIREBASE AUTH
-    // ---------------------------------------
+
+    // LINK GOOGLE ACCOUNT TO FIREBASE
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         String idToken = acct.getIdToken();
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
