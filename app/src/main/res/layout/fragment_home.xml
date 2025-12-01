@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/home_frame"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     tools:context=".Home">
 
@@ -14,141 +14,127 @@
         android:padding="10dp"
         android:orientation="vertical">
 
-        <!-- Title -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="FITLYFE"
+            android:gravity="center_horizontal"
             android:textStyle="bold"
             android:textSize="24dp"
-            android:gravity="center_horizontal"
-            android:paddingBottom="10dp"/>
+            android:paddingBottom="10dp"
+            android:text="FITLYFE" />
 
-        <!-- Checkbox -->
         <CheckBox
-            android:id="@+id/dailyWorkoutLog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Did You Train Today?"
-            android:layout_marginBottom="10dp"/>
+            android:id="@+id/dailyWorkoutLog"
+            android:layout_marginBottom="10dp"
+            android:text="Did You Train Today?"/>
 
-        <!-- STEP + CALORIE ROW -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
+            android:orientation="horizontal">
 
             <!-- STEP COUNT BOX -->
             <LinearLayout
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_bg"
+                android:id="@+id/stepBox"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:padding="10dp"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/rounded_bg"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="STEP COUNT"
+                    android:gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:gravity="center"/>
+                    android:textSize="18dp"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvStepCountLabel"
                     android:layout_height="wrap_content"
-                    android:text="10000/10000"
+                    android:layout_width="wrap_content"
+                    android:text="0/10000"
                     android:textStyle="bold"
                     android:padding="10dp"
-                    android:gravity="center"/>
+                    android:layout_gravity ="center"/>
 
-                <!-- SEMICIRCLE -->
-                <FrameLayout
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:clipChildren="true"
-                    android:clipToPadding="true">
-
-                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                        android:id="@+id/stepProgressBar"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        />
-                </FrameLayout>
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/stepProgressBar"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 
-            <!-- CALORIE BOX -->
+            <!-- CALORIES BOX -->
             <LinearLayout
-                android:id="@+id/calorieBox"
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rounded_bg"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:padding="10dp"
-                android:layout_marginLeft="20dp"
-                android:orientation="vertical"
-                android:gravity="center">
+                android:id="@+id/calorieBox"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/rounded_bg"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="CALORIES"
+                    android:gravity="center_horizontal"
                     android:textStyle="bold"
-                    android:textSize="18dp"
-                    android:gravity="center"/>
+                    android:textSize="18dp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:padding="10dp"
-                    android:gravity="center"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/currentCalorie"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:text="0"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:text="/"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
 
                     <TextView
                         android:id="@+id/maxCalorie"
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
                         android:text="0"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold"
+                        android:layout_gravity ="center"/>
+
                 </LinearLayout>
 
-                <FrameLayout
-                    android:layout_width="150dp"
-                    android:layout_height="75dp"
-                    android:clipChildren="true"
-                    android:clipToPadding="true">
-
-                    <com.mikhaellopez.circularprogressbar.CircularProgressBar
-                        android:id="@+id/calorieProgressBar"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        />
-                </FrameLayout>
+                <com.mikhaellopez.circularprogressbar.CircularProgressBar
+                    android:id="@+id/calorieProgressBar"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"/>
 
             </LinearLayout>
 
         </LinearLayout>
 
         <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/monthlyBarChart"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:id="@+id/monthlyBarChart"/>
 
     </LinearLayout>
 
