@@ -165,7 +165,7 @@ public class Home extends Fragment implements SensorEventListener {
         }
 
         loadStepGoal();
-
+        updateChartFromFirebase();
         return view;
     }
 
@@ -304,7 +304,8 @@ public class Home extends Fragment implements SensorEventListener {
                 if (trained != null && trained) count++;
             }
 
-            barArrayList.add(new BarEntry(0, count));
+            int currentMonthIndex = new Date().getMonth();
+            barArrayList.add(new BarEntry(currentMonthIndex, count));
 
             BarChart barChart = getView().findViewById(R.id.monthlyBarChart);
             BarDataSet set = new BarDataSet(barArrayList, "Workouts this month");

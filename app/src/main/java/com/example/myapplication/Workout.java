@@ -58,6 +58,9 @@ public class Workout extends Fragment {
 
         String[] days = {"Saturday","Sunday","Monday","Tuesday","Wednesday","Thursday","Friday"};
         daySpinner.setAdapter(new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_dropdown_item,days));
+        adapter.setOnDeleteListener(workout -> {
+            deleteWorkoutFromFirebase(workout);
+        });
 
         daySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -74,7 +77,22 @@ public class Workout extends Fragment {
             }
         });
 
+        removeWorkoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showRemoveWorkoutDialog();
+            }
+        });
+
         return view;
+    }
+
+    private void showRemoveWorkoutDialog() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("Delete Workout")
+                .setMessage("Long press a workout to delete it.")
+                .setPositiveButton("OK", null)
+                .show();
     }
 
     private void showAddWorkoutDialog(){
@@ -182,5 +200,32 @@ public class Workout extends Fragment {
 
 
     }
+
+    private void deleteWorkoutFromFirebase(Workout_Modal workout) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference ref = FirebaseDatabase.getInstance()
+                .getReference("users")
+                .child(uid)
+                .child("workouts")
+                .child(selectedDay);
+
+        ref.get().addOnSuccessListener(snapshot -> {
+            for (DataSnapshot ds : snapshot.getChildren()) {
+                Workout_Modal w = ds.getValue(Workout_Modal.class);
+
+                if (w != null &&
+                        w.name.equals(workout.name) &&
+                        w.calories.equals(workout.calories) &&
+                        w.img.equals(workout.img)) {
+
+                    ds.getRef().removeValue();
+                    break;
+                }
+            }
+
+            loadWorkoutsFromFirebase();
+        });
+    }
+
 
 }

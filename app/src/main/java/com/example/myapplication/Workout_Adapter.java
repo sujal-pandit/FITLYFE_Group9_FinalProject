@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Workout_Adapter extends RecyclerView.Adapter<Workout_Adapter.View_Holder> {
     Context context;
@@ -47,6 +48,13 @@ public class Workout_Adapter extends RecyclerView.Adapter<Workout_Adapter.View_H
         } else {
             holder.image.setImageResource(R.drawable.default_workout);
         }
+
+        holder.itemView.setOnLongClickListener(v -> {
+            if (deleteListener != null) {
+                deleteListener.onDelete(list.get(position));
+            }
+            return true;
+        });
     }
 
     @Override
@@ -67,5 +75,15 @@ public class Workout_Adapter extends RecyclerView.Adapter<Workout_Adapter.View_H
             image = itemView.findViewById(R.id.workout_image);
 
         }
+    }
+
+    public interface OnWorkoutDeleteListener {
+        void onDelete(Workout_Modal workout);
+    }
+
+    private OnWorkoutDeleteListener deleteListener;
+
+    public void setOnDeleteListener(OnWorkoutDeleteListener listener) {
+        this.deleteListener = listener;
     }
 }
